@@ -64,7 +64,7 @@ int main() {
 		printf("3. Вихід.\n");
 		Sleep(250);
 		printf("\n\n----------------------------------");
-		Sleep(500);
+		Sleep(250);
 		printf("\n> ");
 		scanf("%d", &a);
 		system("cls");
@@ -79,8 +79,13 @@ int main() {
     scanf("%d", &topicChoice);
     topicChoice--;
     
-    const char* currentTopic = topicFiles[topicChoice];
-    printf("Тема: %s\n\n", topicNames[topicChoice]);
+    while (scanf("%d", &topicChoice) != 1 || topicChoice < 1 || topicChoice > 5) {
+        printf("Неправильний вибір. Введіть номер теми знову (1-5): ");
+        while (getchar() != '\n');
+    }
+    
+    const char* currentTopic = topicFiles[topicChoice - 1];
+    printf("Тема: %s\n\n", topicNames[topicChoice - 1]);
     printf("Будь ласка, вводьте слова у нижньому регістрі \nдля запобігання перенавантаження бази даних \n\n\n");
 
     char word[MAX_WORD_LENGTH];
@@ -88,7 +93,9 @@ int main() {
     scanf("%s", word);
     
     if (strcmp(word, "вихід")==0) {
-            	return 0;
+            	printf("\n - Ви здалися. Гра завершена. - \n\n");
+            	system("pause");
+            	main ();
 			}
 	if (strcmp(word, "здаюся")==0) {
             	printf("\n - Ви здалися. Гра завершена. - \n\n");
@@ -118,11 +125,14 @@ int main() {
         char nextword[MAX_WORD_LENGTH];
         scanf("%s", nextword);
         if (strcmp(nextword, "здаюся")==0) {
-            	printf("\nВи здалися. Гра завершена.\n\n");
-            	break;
+            	printf("\n - Ви здалися. Гра завершена. - \n\n");
+            	system("pause");
+            	main ();
 			}
 		if (strcmp(nextword, "вихід")==0) {
-            	return 0;
+            	printf("\n - Ви здалися. Гра завершена. - \n\n");
+            	system("pause");
+            	main ();
 			}
 
         while (nextword[0]!=lastChar) {
